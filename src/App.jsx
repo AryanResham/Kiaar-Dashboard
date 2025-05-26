@@ -5,12 +5,12 @@ import Sidebar from "./components/sidebar";
 import Header from "./components/header";
 import Dashboard from "./components/dashboard";
 import DataManagement from "./components/data-management";
-import InteractiveMap from "./components/interactive-map";
 import DataVisualization from "./components/data-visualization";
 import Users from "./components/users";
 import Settings from "./components/settings";
 import Tools from "./components/tools";
-
+import 'leaflet/dist/leaflet.css';
+import MapView from "./components/MapView";
 export default function App() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [darkMode, setDarkMode] = useState(true);
@@ -23,7 +23,7 @@ export default function App() {
       case "data-management":
         return <DataManagement />;
       case "map":
-        return <InteractiveMap />;
+        return <MapView />;
       case "data-visualization":
         return <DataVisualization />;
       case "users":
