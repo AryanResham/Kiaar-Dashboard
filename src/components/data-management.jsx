@@ -142,7 +142,7 @@ export default function DataManagement({ darkMode }) {
               : "bg-white border-gray-200"
           } transition-colors`}
         >
-          <div className="flex flex-col sm:flex-row gap-4 mb-6">
+          <div className="pt-3 flex flex-col sm:flex-row gap-4 mb-6">
             <div className={`relative flex-1 `}>
               <input
                 type="text"
@@ -152,7 +152,7 @@ export default function DataManagement({ darkMode }) {
                 className={`w-full pl-10 pr-4 py-2 border rounded-lg ${
                   darkMode
                     ? "bg-gray-700 border-gray-700 text-white placeholder-gray-400"
-                    : "bg-white border-gray-400 text-gray-900 placeholder-gray-500"
+                    : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
                 } transition-colors`}
               />
               <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
@@ -163,7 +163,7 @@ export default function DataManagement({ darkMode }) {
               className={`flex items-center px-4 py-2 border rounded-lg transition-colors ${
                 darkMode
                   ? "border-gray-700 bg-gray-700 text-white hover:bg-gray-600"
-                  : "border-gray-400 bg-white text-gray-900 hover:bg-gray-50"
+                  : "border-gray-300 bg-white text-gray-900 hover:bg-gray-50"
               }`}
             >
               <span className="mr-2">🔽</span>
@@ -174,7 +174,7 @@ export default function DataManagement({ darkMode }) {
               className={`p-2 border rounded-lg transition-colors ${
                 darkMode
                   ? "border-gray-700 bg-gray-700 text-white hover:bg-gray-600"
-                  : "border-gray-400 bg-white text-gray-900 hover:bg-gray-50"
+                  : "border-gray-300 bg-white text-gray-900 hover:bg-gray-50"
               }`}
             >
               🔄
@@ -213,7 +213,6 @@ export default function DataManagement({ darkMode }) {
                       className={`py-3 px-4 ${
                         darkMode ? "text-white" : "text-gray-900"
                       }`}
-                      // "py-3 px-4 text-gray-900 dark:text-white"
                     >
                       {dataset.name}
                     </td>

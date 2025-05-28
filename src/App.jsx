@@ -9,7 +9,7 @@ import DataVisualization from "./components/data-visualization";
 import Users from "./components/users";
 import Settings from "./components/settings";
 import Tools from "./components/tools";
-import 'leaflet/dist/leaflet.css';
+import "leaflet/dist/leaflet.css";
 import MapView from "./components/MapView";
 export default function App() {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -23,17 +23,17 @@ export default function App() {
       case "data-management":
         return <DataManagement darkMode={darkMode} />;
       case "map":
-        return <MapView />;
+        return <MapView darkMode={darkMode} />;
       case "data-visualization":
-        return <DataVisualization />;
+        return <DataVisualization darkMode={darkMode} />;
       case "users":
-        return <Users />;
+        return <Users darkMode={darkMode} />;
       case "settings":
-        return <Settings />;
+        return <Settings darkMode={darkMode} />;
       case "tools":
-        return <Tools />;
+        return <Tools darkMode={darkMode} />;
       default:
-        return <Dashboard />;
+        return <Dashboard darkMode={darkMode} />;
     }
   };
 
