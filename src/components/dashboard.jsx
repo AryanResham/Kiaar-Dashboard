@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 
-export default function Dashboard() {
-  const [selectedRegion, setSelectedRegion] = useState("All Regions")
-  const [selectedPeriod, setSelectedPeriod] = useState("Last 7 Days")
-  const [activeTab, setActiveTab] = useState("Vegetation Health")
+export default function Dashboard({ darkMode }) {
+  const [selectedRegion, setSelectedRegion] = useState("All Regions");
+  const [selectedPeriod, setSelectedPeriod] = useState("Last 7 Days");
+  const [activeTab, setActiveTab] = useState("Vegetation Health");
 
   const metrics = [
     {
@@ -32,16 +32,27 @@ export default function Dashboard() {
       change: "March 26, 2025 at 14:30",
       changeType: "neutral",
     },
-  ]
+  ];
 
-  const tabs = ["Vegetation Health", "Water Stress", "Land Classification", "Interactive Map"]
+  const tabs = [
+    "Vegetation Health",
+    "Water Stress",
+    "Land Classification",
+    "Interactive Map",
+  ];
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">GIS Analytics Dashboard</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <h1
+            className={`text-2xl font-bold ${
+              darkMode ? "text-white" : "text-gray-900"
+            }`}
+          >
+            GIS Analytics Dashboard
+          </h1>
+          <p className={`${darkMode ? "text-gray-400" : "text-gray-600"} mt-1`}>
             Monitor vegetation health, water stress, and land classification
           </p>
         </div>
@@ -50,7 +61,11 @@ export default function Dashboard() {
           <select
             value={selectedRegion}
             onChange={(e) => setSelectedRegion(e.target.value)}
-            className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className={`px-4 py-2 border rounded-lg ${
+              darkMode
+                ? "bg-gray-700 text-white border-gray-600"
+                : "bg-white text-gray-900 border-gray-300"
+            }`}
           >
             <option>All Regions</option>
             <option>North Region</option>
@@ -62,7 +77,11 @@ export default function Dashboard() {
           <select
             value={selectedPeriod}
             onChange={(e) => setSelectedPeriod(e.target.value)}
-            className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className={`px-4 py-2 border rounded-lg ${
+              darkMode
+                ? "bg-gray-700 text-white border-gray-600"
+                : "bg-white text-gray-900 border-gray-300"
+            }`}
           >
             <option>Last 7 Days</option>
             <option>Last 30 Days</option>
@@ -80,17 +99,35 @@ export default function Dashboard() {
         {metrics.map((metric, index) => (
           <div
             key={index}
-            className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700"
+            className={`p-6 rounded-lg shadow-sm border ${
+              darkMode
+                ? "bg-gray-800 border-gray-700"
+                : "bg-white border-gray-200"
+            }`}
           >
-            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">{metric.title}</h3>
-            <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">{metric.value}</div>
+            <h3
+              className={`text-sm font-medium mb-2 ${
+                darkMode ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
+              {metric.title}
+            </h3>
+            <div
+              className={`text-2xl font-bold mb-1 ${
+                darkMode ? "text-white" : "text-gray-900"
+              }`}
+            >
+              {metric.value}
+            </div>
             <div
               className={`text-sm ${
                 metric.changeType === "positive"
                   ? "text-green-600"
                   : metric.changeType === "warning"
-                    ? "text-yellow-600"
-                    : "text-gray-500 dark:text-gray-400"
+                  ? "text-yellow-600"
+                  : darkMode
+                  ? "text-gray-400"
+                  : "text-gray-500"
               }`}
             >
               {metric.change}
@@ -99,8 +136,16 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-        <div className="border-b border-gray-200 dark:border-gray-700">
+      <div
+        className={`rounded-lg shadow-sm border ${
+          darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
+        }`}
+      >
+        <div
+          className={`border-b ${
+            darkMode ? "border-gray-700" : "border-gray-200"
+          }`}
+        >
           <nav className="flex space-x-8 px-6">
             {tabs.map((tab) => (
               <button
@@ -108,8 +153,12 @@ export default function Dashboard() {
                 onClick={() => setActiveTab(tab)}
                 className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === tab
-                    ? "border-blue-500 text-blue-600 dark:text-blue-400"
-                    : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+                    ? darkMode
+                      ? "border-blue-500 text-blue-400"
+                      : "border-blue-500 text-blue-600"
+                    : darkMode
+                    ? "border-transparent text-gray-400 hover:text-gray-300"
+                    : "border-transparent text-gray-500 hover:text-gray-700"
                 }`}
               >
                 {tab}
@@ -120,18 +169,36 @@ export default function Dashboard() {
 
         <div className="p-6">
           <div className="mb-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Vegetation Health Indices</h3>
-            <p className="text-gray-600 dark:text-gray-400">Track NDVI, EVI, and SAVI indices over time</p>
+            <h3
+              className={`text-lg font-semibold ${
+                darkMode ? "text-white" : "text-gray-900"
+              }`}
+            >
+              Vegetation Health Indices
+            </h3>
+            <p className={`${darkMode ? "text-gray-400" : "text-gray-600"}`}>
+              Track NDVI, EVI, and SAVI indices over time
+            </p>
           </div>
 
-          <div className="h-96 flex items-center justify-center bg-gray-50 dark:bg-gray-700 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
+          <div
+            className={`h-96 flex items-center justify-center rounded-lg border-2 border-dashed ${
+              darkMode
+                ? "bg-gray-700 border-gray-600"
+                : "bg-gray-50 border-gray-300"
+            }`}
+          >
             <div className="text-center">
               <div className="text-4xl mb-2">📊</div>
-              <div className="text-gray-500 dark:text-gray-400">[Chart Here]</div>
+              <div
+                className={`${darkMode ? "text-gray-400" : "text-gray-500"}`}
+              >
+                [Chart Here]
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

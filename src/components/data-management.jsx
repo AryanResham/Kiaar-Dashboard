@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 
-export default function DataManagement() {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [selectedTab, setSelectedTab] = useState("Datasets")
-  const [showFilter, setShowFilter] = useState(false)
+export default function DataManagement({ darkMode }) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTab, setSelectedTab] = useState("Datasets");
+  const [showFilter, setShowFilter] = useState(false);
 
   const [datasets, setDatasets] = useState([
     {
@@ -48,37 +48,45 @@ export default function DataManagement() {
       lastUpdated: "2025-03-05",
       status: "Active",
     },
-  ])
+  ]);
 
-  const tabs = ["Datasets", "Imports", "Exports", "Archives"]
+  const tabs = ["Datasets", "Imports", "Exports", "Archives"];
 
   const filteredDatasets = datasets.filter(
     (dataset) =>
       dataset.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      dataset.type.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+      dataset.type.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const handleDelete = (id) => {
-    setDatasets(datasets.filter((dataset) => dataset.id !== id))
-  }
+    setDatasets(datasets.filter((dataset) => dataset.id !== id));
+  };
 
   const getStatusColor = (status) => {
     switch (status) {
       case "Active":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
       case "Processing":
-        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200"
+        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200";
       default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
+        return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200";
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+      <div
+        className={`flex flex-col sm:flex-row sm:items-center sm:justify-between ${
+          darkMode
+            ? " border-gray-700 text-white"
+            : "border-gray-200 text-gray-900"
+        }`}
+      >
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Data Management</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">Manage, import, and export GIS datasets</p>
+          <h1 className="text-2xl font-bold">Data Management</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
+            Manage, import, and export GIS datasets
+          </p>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-4 sm:mt-0">
@@ -90,23 +98,35 @@ export default function DataManagement() {
             <span className="mr-2">📤</span>
             Export
           </button>
-          <button className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors">
+          <button className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800">
             + New Dataset
           </button>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-        <div className="border-b border-gray-200 dark:border-gray-700">
+      <div
+        className={`rounded-lg shadow-sm border ${
+          darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
+        } transition-colors`}
+      >
+        <div
+          className={`border-b rounded-t-lg ${
+            darkMode
+              ? "bg-gray-800 border-gray-700"
+              : "bg-white border-gray-200"
+          } transition-colors`}
+        >
           <nav className="flex space-x-8 px-6">
             {tabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setSelectedTab(tab)}
-                className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                className={`py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
                   selectedTab === tab
-                    ? "border-blue-500 text-blue-600 dark:text-blue-400"
-                    : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+                    ? `border-blue-500 ${
+                        darkMode ? "text-blue-400" : "text-blue-600"
+                      }`
+                    : `border-transparent text-gray-700 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300`
                 }`}
               >
                 {tab}
@@ -115,28 +135,48 @@ export default function DataManagement() {
           </nav>
         </div>
 
-        <div className="p-6">
+        <div
+          className={`px-4 py-2 rounded-lg ${
+            darkMode
+              ? "bg-gray-800 border-gray-700"
+              : "bg-white border-gray-200"
+          } transition-colors`}
+        >
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
-            <div className="relative flex-1">
+            <div className={`relative flex-1 `}>
               <input
                 type="text"
                 placeholder="Search datasets..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                className={`w-full pl-10 pr-4 py-2 border rounded-lg ${
+                  darkMode
+                    ? "bg-gray-700 border-gray-700 text-white placeholder-gray-400"
+                    : "bg-white border-gray-400 text-gray-900 placeholder-gray-500"
+                } transition-colors`}
               />
               <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
             </div>
 
             <button
               onClick={() => setShowFilter(!showFilter)}
-              className="flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+              className={`flex items-center px-4 py-2 border rounded-lg transition-colors ${
+                darkMode
+                  ? "border-gray-700 bg-gray-700 text-white hover:bg-gray-600"
+                  : "border-gray-400 bg-white text-gray-900 hover:bg-gray-50"
+              }`}
             >
               <span className="mr-2">🔽</span>
               Filter
             </button>
 
-            <button className="p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors">
+            <button
+              className={`p-2 border rounded-lg transition-colors ${
+                darkMode
+                  ? "border-gray-700 bg-gray-700 text-white hover:bg-gray-600"
+                  : "border-gray-400 bg-white text-gray-900 hover:bg-gray-50"
+              }`}
+            >
               🔄
             </button>
           </div>
@@ -144,27 +184,48 @@ export default function DataManagement() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-200 dark:border-gray-700">
-                  <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Name</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Type</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Size</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Last Updated</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Status</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Actions</th>
+                <tr
+                  className={`border-b ${
+                    darkMode
+                      ? "text-white border-gray-700"
+                      : "text-gray-900 border-gray-200"
+                  }`}
+                >
+                  <th className="text-left py-3 px-4 ">Name</th>
+                  <th className="text-left py-3 px-4 ">Type</th>
+                  <th className="text-left py-3 px-4 ">Size</th>
+                  <th className="text-left py-3 px-4 ">Last Updated</th>
+                  <th className="text-left py-3 px-4 ">Status</th>
+                  <th className="text-left py-3 px-4 ">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredDatasets.map((dataset) => (
                   <tr
                     key={dataset.id}
-                    className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    className={`border-b ${
+                      darkMode
+                        ? "text-gray-600 border-gray-700"
+                        : "text-gray-400 border-gray-200"
+                    }`}
                   >
-                    <td className="py-3 px-4 text-gray-900 dark:text-white">{dataset.name}</td>
-                    <td className="py-3 px-4 text-gray-600 dark:text-gray-400">{dataset.type}</td>
-                    <td className="py-3 px-4 text-gray-600 dark:text-gray-400">{dataset.size}</td>
-                    <td className="py-3 px-4 text-gray-600 dark:text-gray-400">{dataset.lastUpdated}</td>
+                    <td
+                      className={`py-3 px-4 ${
+                        darkMode ? "text-white" : "text-gray-900"
+                      }`}
+                      // "py-3 px-4 text-gray-900 dark:text-white"
+                    >
+                      {dataset.name}
+                    </td>
+                    <td className="py-3 px-4">{dataset.type}</td>
+                    <td className="py-3 px-4">{dataset.size}</td>
+                    <td className="py-3 px-4">{dataset.lastUpdated}</td>
                     <td className="py-3 px-4">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(dataset.status)}`}>
+                      <span
+                        className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                          dataset.status
+                        )}`}
+                      >
                         {dataset.status}
                       </span>
                     </td>
@@ -189,5 +250,5 @@ export default function DataManagement() {
         </div>
       </div>
     </div>
-  )
+  );
 }

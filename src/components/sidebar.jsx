@@ -22,15 +22,39 @@ export default function Sidebar({
     <div
       className={`fixed left-0 top-0 h-full ${collapsed ? "w-16" : "w-64"} ${
         darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
-      } border-r transition-all duration-300 z-10`}
+      } border-r z-10`}
     >
       <div className="p-4 py-6">
-        <div className="flex items-center space-x-2 ">
+        <div className="flex items-center space-x-2">
           <div className="grid grid-cols-2 gap-1 w-8 h-8">
-            <div className="bg-white rounded-sm"></div>
-            <div className="bg-white rounded-sm"></div>
-            <div className="bg-white rounded-sm"></div>
-            <div className="bg-white rounded-sm"></div>
+            <div
+              className={`${
+                darkMode
+                  ? "bg-white border-gray-200"
+                  : "bg-gray-800 border-gray-700"
+              }`}
+            ></div>
+            <div
+              className={`${
+                darkMode
+                  ? "bg-white border-gray-200"
+                  : "bg-gray-800 border-gray-700"
+              }`}
+            ></div>
+            <div
+              className={`${
+                darkMode
+                  ? "bg-white border-gray-200"
+                  : "bg-gray-800 border-gray-700"
+              }`}
+            ></div>
+            <div
+              className={`${
+                darkMode
+                  ? "bg-white border-gray-200"
+                  : "bg-gray-800 border-gray-700"
+              }`}
+            ></div>
           </div>
           <span
             className={`text-xl font-bold px-4 ${
@@ -47,7 +71,7 @@ export default function Sidebar({
           <button
             key={item.id}
             onClick={() => setActiveTab(item.id)}
-            className={`w-full flex items-center px-4 py-3 text-left transition-colors ${
+            className={`w-full flex items-center px-4 py-3 text-left ${
               activeTab === item.id
                 ? darkMode
                   ? "bg-gray-700 text-white border-r-2 border-blue-500"
@@ -76,7 +100,7 @@ export default function Sidebar({
           )}
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+            className={`relative inline-flex h-6 w-11 items-center rounded-full ${
               darkMode ? "bg-blue-600" : "bg-gray-200"
             }`}
           >

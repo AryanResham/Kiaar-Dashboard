@@ -19,9 +19,9 @@ export default function App() {
   const renderContent = () => {
     switch (activeTab) {
       case "dashboard":
-        return <Dashboard />;
+        return <Dashboard darkMode={darkMode} />;
       case "data-management":
-        return <DataManagement />;
+        return <DataManagement darkMode={darkMode} />;
       case "map":
         return <MapView />;
       case "data-visualization":
