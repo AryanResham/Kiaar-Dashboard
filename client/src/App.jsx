@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "./components/sidebar";
-import Header from "./components/header";
-import Dashboard from "./components/dashboard";
-import DataManagement from "./components/data-management";
-import DataVisualization from "./components/data-visualization";
-import Users from "./components/users";
-import Settings from "./components/settings";
-import Tools from "./components/tools";
+import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
+import Dashboard from "./components/Dashboard";
+import DataManagement from "./components/DataManagement";
+import DataVisualization from "./components/DataVisualization";
+import Users from "./components/Users";
+import Settings from "./components/Settings";
+import Tools from "./components/Tools";
 import "leaflet/dist/leaflet.css";
 import MapView from "./components/MapView";
 export default function App() {
