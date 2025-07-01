@@ -1,6 +1,8 @@
 "use client";
 
-export default function Users({ darkMode }) {
+import { useState } from "react";
+
+export default function Users({ darkMode, user, onLogout }) {
   return (
     <div className="space-y-6">
       <div>
@@ -33,6 +35,19 @@ export default function Users({ darkMode }) {
           <p className={`${darkMode ? "text-gray-500" : "text-gray-400"}`}>
             This section will contain user management features.
           </p>
+          {user && (
+            <div className="mt-6">
+              <div className="mb-2 text-lg font-bold">
+                Logged in as: {user.username}
+              </div>
+              <button
+                onClick={onLogout}
+                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
+              >
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

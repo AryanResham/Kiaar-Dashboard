@@ -1,0 +1,7 @@
+[
+  { "date": "2025-07-01", "Forest": 30, "Agriculture": 50, "Urban": 20 },
+  { "date": "2025-07-02", "Forest": 32, "Agriculture": 48, "Urban": 20 },
+  { "date": "2025-07-03", "Forest": 31, "Agriculture": 49, "Urban": 20 },
+  { "date": "2025-07-04", "Forest": 33, "Agriculture": 47, "Urban": 20 },
+  { "date": "2025-07-05", "Forest": 34, "Agriculture": 46, "Urban": 20 }
+]
