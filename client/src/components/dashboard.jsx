@@ -1,6 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import ChartBox from "./ChartBox";
+import vegetationHealthData from "./vegetationHealthData.json";
+import waterStressData from "./waterStressData.json";
+import landClassificationData from "./landClassificationData.json";
 
 export default function Dashboard({ darkMode }) {
   const [selectedRegion, setSelectedRegion] = useState("All Regions");
@@ -38,8 +42,26 @@ export default function Dashboard({ darkMode }) {
     "Vegetation Health",
     "Water Stress",
     "Land Classification",
-    "Interactive Map",
   ];
+
+  // Map tab to data and chart info
+  const tabDataMap = {
+    "Vegetation Health": {
+      data: vegetationHealthData,
+      title: "Vegetation Health Indices",
+      desc: "Track NDVI, EVI, and SAVI indices over time"
+    },
+    "Water Stress": {
+      data: waterStressData,
+      title: "Water Stress Indices",
+      desc: "Monitor water stress levels and trends"
+    },
+    "Land Classification": {
+      data: landClassificationData,
+      title: "Land Classification",
+      desc: "Analyze land cover and classification changes"
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -174,10 +196,10 @@ export default function Dashboard({ darkMode }) {
                 darkMode ? "text-white" : "text-gray-900"
               }`}
             >
-              Vegetation Health Indices
+              {tabDataMap[activeTab].title}
             </h3>
             <p className={`${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-              Track NDVI, EVI, and SAVI indices over time
+              {tabDataMap[activeTab].desc}
             </p>
           </div>
 
@@ -188,14 +210,7 @@ export default function Dashboard({ darkMode }) {
                 : "bg-gray-50 border-gray-300"
             }`}
           >
-            <div className="text-center">
-              <div className="text-4xl mb-2">📊</div>
-              <div
-                className={`${darkMode ? "text-gray-400" : "text-gray-500"}`}
-              >
-                [Chart Here]
-              </div>
-            </div>
+            <ChartBox data={tabDataMap[activeTab].data} />
           </div>
         </div>
       </div>

@@ -108,7 +108,7 @@ Max Longitude: ${maxLng.toFixed(6)}`);
     setStartPoint(null);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!bounds) return;
     const [southWest, northEast] = bounds;
     const minLat = Math.min(southWest[0], northEast[0]);
@@ -127,11 +127,20 @@ Max Longitude: ${maxLng.toFixed(6)}`);
         startDate: startDate.toISOString().split("T")[0],
         endDate: endDate.toISOString().split("T")[0],
       },
+      // Optionally add username if available
     };
 
-    console.log("Data to send to API:", data);
-    // TODO: Send data to your API
-    alert(JSON.stringify(data, null, 2));
+    try {
+      const res = await fetch('/api/map/coordinates', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      alert(result.message + '\n' + JSON.stringify(result.bbox, null, 2));
+    } catch (err) {
+      alert('Failed to send coordinates');
+    }
   };
 
   return (

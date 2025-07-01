@@ -7,6 +7,8 @@ export default function Sidebar({
   setDarkMode,
   collapsed,
   setCollapsed,
+  user,
+  onUserClick,
 }) {
   const menuItems = [
     { id: "dashboard", label: "Dashboard", icon: "📊" },
@@ -14,7 +16,6 @@ export default function Sidebar({
     { id: "map", label: "Map", icon: "🗺️" },
     { id: "data-visualization", label: "Data Visualization", icon: "📈" },
     { id: "users", label: "Users", icon: "👥" },
-    { id: "settings", label: "Settings", icon: "⚙️" },
     { id: "tools", label: "Tools", icon: "🔧" },
   ];
 
@@ -119,7 +120,13 @@ export default function Sidebar({
             }`}
           >
             <span>👤</span>
-            <span>User details / admin</span>
+            {user ? (
+              <button onClick={onUserClick} className="underline cursor-pointer">
+                {user.username}
+              </button>
+            ) : (
+              <span>User details / admin</span>
+            )}
           </div>
         )}
       </div>
