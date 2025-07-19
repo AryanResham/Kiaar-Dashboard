@@ -7,7 +7,7 @@ import Dashboard from "./components/Dashboard";
 import DataManagement from "./components/DataManagement";
 import DataVisualization from "./components/DataVisualization";
 import Users from "./components/Users";
-import Settings from "./components/Settings";
+
 import Tools from "./components/Tools";
 import "leaflet/dist/leaflet.css";
 import MapView from "./components/MapView";
